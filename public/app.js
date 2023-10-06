@@ -1,26 +1,30 @@
 "use strict";
-// const anchor = document.querySelector('a')!;
-// Solution 2: add a "!" in the end tells typescript it is definitely not "null", please don't jump error
-// Problem: typescript would jump error because it thinks it is "null"
-// console.log(anchor.href);
-// Solution 1:
-// if(anchor){
-//     console.log(anchor.href);
-// }
-// ---
-// const form = document.querySelector('form')!;
-// typescript recognize "form" as a "HTMLFormElement" (hover the code and see)
-// const form = document.querySelector('.new-item-form')!;
-// typescript recognize "form" as a "Element" (hover the code and see), because select by "class" can have more possibility
+// classes
+class Invoice {
+    constructor(c, d, a) {
+        this.client = c;
+        this.details = d;
+        this.amount = a;
+    }
+    format() {
+        return `${this.client} owes $${this.amount} for ${this.details}`;
+    }
+}
+const invOne = new Invoice('mario', 'work on the mario website', 250);
+const invTwo = new Invoice('luigi', 'work on the luigi website', 300);
+let invoices = [];
+// invoices.push('hello') // error
+// invoices.push({name: 'shaun'}) // error
+invoices.push(invOne);
+invoices.push(invTwo);
+invOne.client = "yoshi";
+invTwo.amount = 400;
+// invTwo.amount = 'hello'; // error
+console.log(invoices);
 const form = document.querySelector('.new-item-form');
-// typescript recognize "form" as a "HTMLFormElement" (hover the code and see)
-// so you can have many options when coding "console.log(form.)" in vscode, you can see many usable methods while coding it
-// const type = document.querySelector('#type');
-// typescript recognize "type" as a "Element | null"
+// inputs
 const type = document.querySelector('#type');
-// typescript recognize "type" as a "HTMLSelectElement"
 const tofrom = document.querySelector('#tofrom');
-// typescript recognize "type" as a "HTMLInputElement"
 const details = document.querySelector('#details');
 const amount = document.querySelector('#amount');
 form.addEventListener('submit', (e) => {
