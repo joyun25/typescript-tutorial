@@ -21,23 +21,23 @@ form.addEventListener('submit', (e) => {
     }
     list.render(doc, type.value, 'end');
 });
-// GENERICS
-const addUID = (obj) => {
-    let uid = Math.floor(Math.random() * 100);
-    return Object.assign(Object.assign({}, obj), { uid });
-};
-let docOne = addUID({ name: 'yoshi', age: 40 });
-console.log(docOne);
-// console.log(docOne.name); // error: typescript doesn't know about "name" and "age" property, so we have to add "<T>". We can change "T" to other letters as well
-console.log(docOne.name);
-const docThree = {
+// ENUMS
+var ResouceType;
+(function (ResouceType) {
+    ResouceType[ResouceType["BOOK"] = 0] = "BOOK";
+    ResouceType[ResouceType["AUTHOR"] = 1] = "AUTHOR";
+    ResouceType[ResouceType["FILM"] = 2] = "FILM";
+    ResouceType[ResouceType["DIRECTOR"] = 3] = "DIRECTOR";
+    ResouceType[ResouceType["PERSON"] = 4] = "PERSON";
+})(ResouceType || (ResouceType = {}));
+const docOne = {
     uid: 1,
-    resourceName: 'person',
-    data: 'shaun'
+    resourceType: ResouceType.BOOK,
+    data: { title: 'name of the wind' }
 };
-const docFour = {
-    uid: 2,
-    resourceName: 'shoppingList',
-    data: ['bread', 'milk', 'toilet roll']
+const docTwo = {
+    uid: 10,
+    resourceType: ResouceType.PERSON,
+    data: { name: 'yoshi' }
 };
-console.log(docThree, docFour);
+console.log(docOne, docTwo);

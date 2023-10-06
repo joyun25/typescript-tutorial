@@ -28,41 +28,25 @@ form.addEventListener('submit', (e: Event) => {
     list.render(doc, type.value, 'end');
 })
 
-// GENERICS
+// ENUMS
+enum ResouceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON}
 
-const addUID = <T extends {name: string}>(obj: T) => {
-  let uid = Math.floor(Math.random() * 100);
-  return {...obj, uid};
-}
-
-let docOne = addUID({name: 'yoshi', age: 40});
-
-console.log(docOne);
-// console.log(docOne.name); // error: typescript doesn't know about "name" and "age" property, so we have to add "<T>". We can change "T" to other letters as well
-console.log(docOne.name); 
-
-// let docTwo = addUID('hello'); // We have to add "extends object" so code like this won't pass
-
-// ---
-
-// with interfaces
-// interfaces define what an object should look
 interface Resource<T> {
   uid: number;
-  resourceName: string;
+  resourceType: ResouceType;
   data: T;
 }
 
-const docThree: Resource<string> = {
+const docOne: Resource<object> = {
   uid: 1,
-  resourceName: 'person',
-  data: 'shaun'
+  resourceType: ResouceType.BOOK, // vscode shows options when coding
+  data: { title: 'name of the wind' }
 }
 
-const docFour: Resource<string[]> = {
-  uid: 2,
-  resourceName: 'shoppingList',
-  data: ['bread', 'milk', 'toilet roll']
+const docTwo: Resource<object> = {
+  uid: 10,
+  resourceType: ResouceType.PERSON, // vscode shows options when coding
+  data: { name: 'yoshi' }
 }
 
-console.log(docThree, docFour);
+console.log(docOne, docTwo);
