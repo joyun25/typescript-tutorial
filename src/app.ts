@@ -27,3 +27,42 @@ form.addEventListener('submit', (e: Event) => {
 
     list.render(doc, type.value, 'end');
 })
+
+// GENERICS
+
+const addUID = <T extends {name: string}>(obj: T) => {
+  let uid = Math.floor(Math.random() * 100);
+  return {...obj, uid};
+}
+
+let docOne = addUID({name: 'yoshi', age: 40});
+
+console.log(docOne);
+// console.log(docOne.name); // error: typescript doesn't know about "name" and "age" property, so we have to add "<T>". We can change "T" to other letters as well
+console.log(docOne.name); 
+
+// let docTwo = addUID('hello'); // We have to add "extends object" so code like this won't pass
+
+// ---
+
+// with interfaces
+// interfaces define what an object should look
+interface Resource<T> {
+  uid: number;
+  resourceName: string;
+  data: T;
+}
+
+const docThree: Resource<string> = {
+  uid: 1,
+  resourceName: 'person',
+  data: 'shaun'
+}
+
+const docFour: Resource<string[]> = {
+  uid: 2,
+  resourceName: 'shoppingList',
+  data: ['bread', 'milk', 'toilet roll']
+}
+
+console.log(docThree, docFour);

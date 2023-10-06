@@ -21,3 +21,23 @@ form.addEventListener('submit', (e) => {
     }
     list.render(doc, type.value, 'end');
 });
+// GENERICS
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docOne = addUID({ name: 'yoshi', age: 40 });
+console.log(docOne);
+// console.log(docOne.name); // error: typescript doesn't know about "name" and "age" property, so we have to add "<T>". We can change "T" to other letters as well
+console.log(docOne.name);
+const docThree = {
+    uid: 1,
+    resourceName: 'person',
+    data: 'shaun'
+};
+const docFour = {
+    uid: 2,
+    resourceName: 'shoppingList',
+    data: ['bread', 'milk', 'toilet roll']
+};
+console.log(docThree, docFour);
